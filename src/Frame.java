@@ -3,18 +3,25 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import net.sf.clipsrules.jni.Environment;
+import net.sf.clipsrules.jni.FactAddressValue;
+import net.sf.clipsrules.jni.MultifieldValue;
 import net.sf.clipsrules.jni.PrimitiveValue;
 /**
  *
  * @author Mohammed
  */
 public class Frame extends javax.swing.JFrame {
-
+  Environment clips = new Environment();
+  
     /**
      * Creates new form FlowerExpertSystem
      */
     public Frame() {
+         clips.loadFromResource("/flower.clp");
         initComponents();
     }
 
@@ -46,9 +53,11 @@ public class Frame extends javax.swing.JFrame {
         jComboBox6 = new javax.swing.JComboBox<>();
         jComboBox7 = new javax.swing.JComboBox<>();
         jComboBox8 = new javax.swing.JComboBox<>();
-        textField1 = new java.awt.TextField();
+        //textField1 = new java.awt.TextField();
         jButton1 = new javax.swing.JButton();
         textField3 = new java.awt.TextField();
+       /*  Environment clips = new Environment();
+         clips.loadFromResource("/flower.clp");*/
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,7 +65,7 @@ public class Frame extends javax.swing.JFrame {
 
         jSlider1.setMaximum(200);
         jSlider1.setMinimum(10);
-        jSlider1.setValue(100);
+        jSlider1.setValue(10);
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jSlider1StateChanged(evt);
@@ -70,17 +79,17 @@ public class Frame extends javax.swing.JFrame {
 
         jLabel3.setText("What is the season of the Flower?");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Summer", "Autumn", "Spring", "Winter" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "summer", "autumn", "Spring", "Winter" }));
 
         jLabel4.setText("What is the color of the flower?");
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "blue", "purple", "red", "yellow", "white", "pink", "orange", "violate", "pinkish-red" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Blue", "Purple", "Red", "Yellow", "White", "Pink", "Orange", "Violate", "Pinkish-red" }));
 
         jLabel5.setText("What is the Root Type of the flower?");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Bulb", "root" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Bulb", "Root" }));
 
-        jLabel6.setText("What is the hight of the flower?");
+        jLabel6.setText("What is the Name of the flower?");
 
         jLabel7.setText("What is soil type of the flower ?");
 
@@ -88,9 +97,9 @@ public class Frame extends javax.swing.JFrame {
 
         jLabel9.setText("Does the flower has Perfume ?");
 
-        jLabel10.setText("The name of the flower is:");
+       // jLabel10.setText("The name of the flower is:");
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Small", "Medium", "Tall" }));
+        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Iris", "Anemone", "Chrysanthemum","Freesia","Dahlia","Narcissus","Camellias","Begonia","Lily","Roses","White lily","Azaleas" }));
 
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Acidic", "Loose", "Fertile", "Rich", "Well-drained" }));
 
@@ -98,13 +107,17 @@ public class Frame extends javax.swing.JFrame {
 
         jComboBox8.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "True", "False" }));
 
-        textField1.setText("textField1");
+       // textField1.setText("textField1");
 
         jButton1.setText("Submit");
         
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                try {
+                    jButton1ActionPerformed(evt);
+                } catch (Exception ex) {
+                    Logger.getLogger(Frame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -116,9 +129,9 @@ public class Frame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
+                //.addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                //.addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -211,13 +224,12 @@ public class Frame extends javax.swing.JFrame {
                             .addComponent(jButton1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(textField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
+                            ))
+                        .addGroup(layout.createSequentialGroup()
                         .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-        );
+                );
         
         pack();
        
@@ -227,59 +239,86 @@ public class Frame extends javax.swing.JFrame {
 
     private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {                                      
         // TODO add your handling code here:
+       
         textField3.setText(String.valueOf(jSlider1.getValue()));
     }          
     
-     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) throws Exception {                                         
         // TODO add your handling code here:
-         Environment clips = new Environment();
-         clips.loadFromResource("/flower.clp");
-         
+        
          //Check the size of the flower 
-         if(jSlider1.getValue()>10 && jSlider1.getValue()< 50)
-         {
-             clips.eval("(assert (height (name small)))");
-         } 
-         else if(jSlider1.getValue()>50 && jSlider1.getValue()< 150)
-         {
-              clips.eval("(assert (height (name meduim)))");
-         }
-         else if( jSlider1.getValue()> 150)
-         {
-             clips.eval("(assert (height (name tall)))");
-         } 
+         
+         if(jSlider1.getValue()>10)
+          clips.eval("(assert (size (no " +jSlider1.getValue()+ ")))");
          // Check the Life type of the flower 
          String lifeCycle = jComboBox2.getSelectedItem().toString();
-         
+         String Perfume = jComboBox8.getSelectedItem().toString();
          if(lifeCycle.equals("One year"))
          {
-             clips.eval("(assert (life_type (type annual)))");
+             clips.eval("(assert (life_cycle (cycle 1)))");
          }
-         else if(lifeCycle.equals("More than one year")) 
+        else if(lifeCycle.equals("More than one year")) 
          {
-             clips.eval("(assert (life_type (type perennial)))");
+             clips.eval("(assert (life_cycle (cycle 5)))");
          }
+        else if(Perfume.equals("True")){
+         clips.eval(  "(assert(perfume (flag 1)))" );
+        }else if(Perfume.equals("False")){
+         clips.eval(  "(assert(perfume (flag 0)))" );
+        }
+         
          // Check the for flower irise 
          String season  = jComboBox1.getSelectedItem().toString(); 
          String color  = jComboBox3.getSelectedItem().toString();
          String lifeType  = jComboBox7.getSelectedItem().toString();
-         
-           clips.eval("(assert(season (name"+ season +")))");
-  clips.eval("(assert(color (name blue)))");
-  clips.eval("(assert(life_type (type perennial)))");
-  clips.eval("(assert(root_type (type bulb)))");
-         if(season.equals("Summer") && color.equals("blue") && lifeType.equals("Perennial") ) 
-         {
-             clips.eval("(assert (flower_name (name irise)))");
+         String rootType  = jComboBox4.getSelectedItem().toString();
+         String soil     = jComboBox6.getSelectedItem().toString();
+         String flowerName = jComboBox5.getSelectedItem().toString();
+         if(!season.equals("Select one")){
+         clips.eval("(assert(season (name "+ season.toLowerCase() +")))");
+         }
+          if(!color.equals("Select one")){
+           clips.eval(  "(assert(color (name "+ color.toLowerCase()+")))" );
+          }
+         if(!lifeType.equals("Select one")){
+            clips.eval("(assert(life_type (type "+ lifeType.toLowerCase() +")))");
+         }
+         if(!rootType.equals("Select one")){
+          clips.eval("(assert(root_type  (type "+ rootType.toLowerCase() +")))");
+         }
+         if(!soil.equals("Select one")){
+            clips.eval("(assert(soil  (type "+ soil.toLowerCase() +")))");
+         }
+         if(!flowerName.equals("Select one")){
+          clips.eval("(assert(flower_name  (name "+ flowerName.toLowerCase() +")))");
          }
          
          
-         clips.run();
 
-        PrimitiveValue value=clips.eval("(facts)");
-        String ou = value.toString();
-        System.out.println(ou); 
-        textField1.setText(ou);
+        
+      
+          
+         /* if(season.equals("Summer") && color.equals("blue") && lifeType.equals("Perennial") ) 
+         {
+             clips.eval("(assert (flower_name (name irise)))");
+         }*/
+         
+         //clips.reset();
+         clips.run();
+         try{
+        //PrimitiveValue value=clips.eval("(facts)");
+        FactAddressValue fv = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f flower_name)) TRUE)")).get(0);
+        //FactAddressValue height_fact = (FactAddressValue) ( clips.eval("(find-fact ((?f height)) TRUE)"));
+        //String height = height_fact.getFactSlot("name").toString() ; +"  "+height
+        String ou = fv.getFactSlot("name").toString() ; 
+        //String ou = value.toString() ; 
+        System.out.println(ou) ; 
+        
+        JOptionPane.showMessageDialog(this,"The Flower name is:"+ ou ); 
+        //textField1.setText(ou);
+         } catch (Exception ex)
+         {}
+         
         
          
          
@@ -341,7 +380,7 @@ public class Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JSlider jSlider1;
-    private java.awt.TextField textField1;
+    //private java.awt.TextField textField1;
     private java.awt.TextField textField3;
     // End of variables declaration                   
 }
