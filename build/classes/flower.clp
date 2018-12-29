@@ -70,18 +70,24 @@
 
 
 (defrule flower_Chrysanthemum  "rule 8"
-(season(name autumn)) (height(name medium)) (color (name yellow))  (color (name white)) => (assert (flower_name (name Chrysanthemum))) (printout t "done" crlf ) )
+(season(name autumn)) (height(name medium)) (color (name yellow))  => (assert (flower_name (name Chrysanthemum))) (printout t "done" crlf ) )
+
+(defrule flower_Chrysanthemum_or0  "rule 8"
+(season(name autumn)) (height(name medium)) (color (name white)) => (assert (flower_name (name Chrysanthemum))) (printout t "done" crlf ) )
 
 (defrule flower_Chrysanthemum_or1  "rule 8"
-(season(name autumn)) (height(name medium)) (color (name yellow)) (color (name purple))   => (assert (flower_name (name Chrysanthemum))) (printout t "done" crlf ) )
+(season(name autumn)) (height(name medium)) (color (name purple))   => (assert (flower_name (name Chrysanthemum))) (printout t "done" crlf ) )
 
 (defrule flower_Chrysanthemum_or2  "rule 8"
-(season(name autumn)) (height(name meduim)) (color (name yellow)) (color (name red)) => (assert (flower_name (name Chrysanthemum))) (printout t "done" crlf ) )
+(season(name autumn)) (height(name meduim)) (color (name red)) => (assert (flower_name (name Chrysanthemum))) (printout t "done" crlf ) )
 
 
 
 (defrule flower_Freesia  "rule 9"
 (season(name spring)) (root_type (type bulb))  (color (name white)) (color (name yellow)) (perfume (flag 1)) => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
+
+(defrule flower_Freesia_or0  "rule 9"
+(season(name spring)) (root_type (type bulb))  (color (name yellow)) (perfume (flag 1)) => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
 
 (defrule flower_Freesia_or1  "rule 9"
 (season(name spring)) (root_type (type bulb)) (color (name white)) (color (name orange)) (perfume (flag 1))   => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
