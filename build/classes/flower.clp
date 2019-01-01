@@ -84,22 +84,22 @@
 
 
 (defrule flower_Freesia  "rule 9"
-(season(name spring)) (root_type (type bulb))  (color (name white)) (color (name yellow)) (perfume (flag 1)) => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
+(season(name spring)) (root_type (type bulb))  (color (name white)) (perfume (flag 1)) => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
 
 (defrule flower_Freesia_or0  "rule 9"
 (season(name spring)) (root_type (type bulb))  (color (name yellow)) (perfume (flag 1)) => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
 
 (defrule flower_Freesia_or1  "rule 9"
-(season(name spring)) (root_type (type bulb)) (color (name white)) (color (name orange)) (perfume (flag 1))   => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
+(season(name spring)) (root_type (type bulb)) (color (name orange)) (perfume (flag 1))   => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
 
 (defrule flower_Freesia_or2  "rule 9"
-(season(name spring)) (root_type (type bulb))(color (name white)) (color (name purple)) (perfume (flag 1)) => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
+(season(name spring)) (root_type (type bulb)) (color (name purple)) (perfume (flag 1)) => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
 
 (defrule flower_Freesia_or3  "rule 9"
-(season(name spring)) (root_type (type bulb)) (color (name white)) (color (name red))  (perfume (flag 1))   => (assert (flower_name (name Freesia))) (printout t "done" crlf ) )
+(season(name spring)) (root_type (type bulb)) (color (name red)) (perfume (flag 1))   => (assert (flower_name (name Freesia))) (printout t "done" crlf ) )
 
 (defrule flower_Freesia_or4  "rule 9"
-(season(name spring)) (root_type (type bulb)) (color (name white)) (color (name blue))  (perfume (flag 1)) => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
+(season(name spring)) (root_type (type bulb)) (color (name blue)) (perfume (flag 1)) => (assert (flower_name (name Freesia ))) (printout t "done" crlf ) )
 
 
 
@@ -108,9 +108,9 @@
 
 
 (defrule flower_Narcissus  "rule 11"
-(root_type (type bulb)) (color (name yellow))   => (assert (flower_name (name Narcissus ))) (printout t "done" crlf ) )
+(season(name spring)) (root_type (type bulb)) (color (name yellow))   => (assert (flower_name (name Narcissus ))) (printout t "done" crlf ) )
 (defrule flower_Narcissus_or1  "rule 11"
-(root_type (type bulb)) (color (name white))   => (assert (flower_name (name Narcissus ))) (printout t "done" crlf ) )
+(season(name spring)) (root_type (type bulb)) (color (name white))   => (assert (flower_name (name Narcissus ))) (printout t "done" crlf ) )
 
 
 (defrule flower_Camellia  "rule 12"
@@ -128,13 +128,13 @@
 
 
 (defrule flower_Begonia "rule 14"
-(height (name small))  (life_type (type annual)) (season(name spring)) (soil (type rich))    => (assert (flower_name (name Begonia))) (printout t "done" crlf ) )
+(height (name small))  (life_type (type annual)) (soil (type rich))    => (assert (flower_name (name Begonia))) (printout t "done" crlf ) )
 
 (defrule flower_Begonia_or1 "rule 14"
-(height (name small))  (life_type (type annual)) (season(name spring)) (soil (type loose))    => (assert (flower_name (name Begonia))) (printout t "done" crlf ) )
+(height (name small))  (life_type (type annual)) (soil (type loose))    => (assert (flower_name (name Begonia))) (printout t "done" crlf ) )
 
 (defrule flower_Begonia_or2 "rule 14"
-(height (name small))  (life_type (type annual)) (season(name spring)) (soil (type fertile))    => (assert (flower_name (name Begonia))) (printout t "done" crlf ) )
+(height (name small))  (life_type (type annual)) (soil (type fertile))    => (assert (flower_name (name Begonia))) (printout t "done" crlf ) )
 
 
 (defrule flower_Azalea "rule 15"
@@ -176,7 +176,7 @@
 (life_type (type perennial)) (root_type (type roots)) (color (name yellow)) (perfume (flag 1)) (soil (type well-drained))  => (assert (flower_name (name Rose ))) (printout t "done" crlf ) )
 
 
-(defrule flower_white_lily "rule 17"
+(defrule flower_white_lily "rule 18"
 (flower_name (name Lily))  (perfume (flag 1))  => (assert (flower_name (name white lily ))) (printout t "done" crlf ) )
 
 

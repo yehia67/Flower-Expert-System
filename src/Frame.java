@@ -10,6 +10,7 @@ import net.sf.clipsrules.jni.Environment;
 import net.sf.clipsrules.jni.FactAddressValue;
 import net.sf.clipsrules.jni.MultifieldValue;
 import net.sf.clipsrules.jni.PrimitiveValue;
+import net.sf.clipsrules.jni.SymbolValue;
 /**
  *
  * @author Mohammed
@@ -248,7 +249,8 @@ public class Frame extends javax.swing.JFrame {
         
          //Check the size of the flower 
          
-         if(jSlider1.getValue()>10)
+         //if(jSlider1.getValue()>10)
+         System.out.println("Jslider value : " + jSlider1.getValue());
           clips.eval("(assert (size (no " +jSlider1.getValue()+ ")))");
          // Check the Life type of the flower 
          String lifeCycle = jComboBox2.getSelectedItem().toString();
@@ -261,7 +263,8 @@ public class Frame extends javax.swing.JFrame {
          {
              clips.eval("(assert (life_cycle (cycle 5)))");
          }
-        else if(Perfume.equals("True")){
+         
+         if(Perfume.equals("True")){
          clips.eval(  "(assert(perfume (flag 1)))" );
         }else if(Perfume.equals("False")){
          clips.eval(  "(assert(perfume (flag 0)))" );
@@ -273,7 +276,7 @@ public class Frame extends javax.swing.JFrame {
          String lifeType  = jComboBox7.getSelectedItem().toString();
          String rootType  = jComboBox4.getSelectedItem().toString();
          String soil     = jComboBox6.getSelectedItem().toString();
-         String flowerName = jComboBox5.getSelectedItem().toString();
+         //String flowerName = jComboBox5.getSelectedItem().toString();
          if(!season.equals("Select one")){
          clips.eval("(assert(season (name "+ season.toLowerCase() +")))");
          }
@@ -289,9 +292,9 @@ public class Frame extends javax.swing.JFrame {
          if(!soil.equals("Select one")){
             clips.eval("(assert(soil  (type "+ soil.toLowerCase() +")))");
          }
-         if(!flowerName.equals("Select one")){
+        /* if(!flowerName.equals("Select one")){
           clips.eval("(assert(flower_name  (name "+ flowerName.toLowerCase() +")))");
-         }
+         }*/
          
          
 
@@ -305,24 +308,93 @@ public class Frame extends javax.swing.JFrame {
          
          //clips.reset();
          clips.run();
+         MultifieldValue flowersFacts = null;
+         FactAddressValue heightFact = null;
+         FactAddressValue lifeTypeFact = null;
          try{
-        //PrimitiveValue value=clips.eval("(facts)");
+        /*PrimitiveValue value=clips.eval("(facts)");
         FactAddressValue fv = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f flower_name)) TRUE)")).get(0);
-        //FactAddressValue height_fact = (FactAddressValue) ( clips.eval("(find-fact ((?f height)) TRUE)"));
+        FactAddressValue height_fact = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f height)) TRUE)")).get(0);
+        MultifieldValue flowersHeight = ((MultifieldValue) clips.eval("(find-fact ((?f height)) TRUE)"));
+        for(int i = 0; i < flowersHeight.size(); i++) {
+            FactAddressValue factValue =  ((FactAddressValue)flowersHeight.get(i));
+            System.out.println("flower " + i + " size  = " + factValue);
+        }
         //String height = height_fact.getFactSlot("name").toString() ; +"  "+height
-        String ou = fv.getFactSlot("name").toString() ; 
-        //String ou = value.toString() ; 
-        System.out.println(ou) ; 
+       // String ou = fv.getFactSlot("name").toString() ; 
+        //String ou = value.toString() ;
+        //System.out.println(fv) ;
+        //System.out.println(ou) ;
+        System.out.println(fv);*/
         
-        JOptionPane.showMessageDialog(this,"The Flower name is:"+ ou ); 
+        //JOptionPane.showMessageDialog(this,"The Flower name is:"+ height_fact );
         //textField1.setText(ou);
-         } catch (Exception ex)
-         {}
-         
-        
-         
-         
-    }          
+            PrimitiveValue value=clips.eval("(facts)");
+            flowersFacts = ((MultifieldValue) clips.eval("(find-all-facts ((?f flower_name)) TRUE)"));
+            heightFact = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f height)) TRUE)")).get(0);
+            lifeTypeFact =  (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f life_type)) TRUE)")).get(0);
+            
+            String flowerFactString = "";
+            String heightFactString = "";
+            String lifeTypeFactString = "";
+            
+            if(flowersFacts.size() > 1) {
+                for(int i = 0; i < flowersFacts.size(); i++) {
+
+                   FactAddressValue fact = (FactAddressValue) flowersFacts.get(i);
+                   String flowerName = fact.getFactSlot("name").toString();
+                   flowerFactString += "flower " + (i + 1) + 
+                           " name is : " + flowerName + "\n";
+                }
+            } else {
+               FactAddressValue fact = (FactAddressValue) flowersFacts.get(0);
+               String flowerName = fact.getFactSlot("name").toString();
+               flowerFactString += "flower name is : " + flowerName;
+            }
+            
+            /*String heightVal = heightFact.getFactSlot("name").toString();
+            heightFactString = "Height is : " + heightVal;
+            
+            String lifeTypeVal = lifeTypeFact.getFactSlot("type").toString();
+            lifeTypeFactString = "Life Type is : " + lifeTypeVal;*/
+            
+            ResultFrame rf = new ResultFrame(flowerFactString);
+            rf.setVisible(true);
+            
+         } catch (Exception ex) {
+             System.out.println(ex.toString());
+             String flowerFactString = null;
+             if(flowersFacts != null && flowersFacts.size() != 0) {
+                 flowerFactString = "" ;
+                 if(flowersFacts.size() > 1) {
+                     for(int i = 0; i < flowersFacts.size(); i++) {
+                         
+                        FactAddressValue fact = (FactAddressValue) flowersFacts.get(i);
+                        String flowerName = fact.getFactSlot("name").toString();
+                        flowerFactString += "flower " + (i + 1) + 
+                           " name is : " + flowerName + "\n";
+                     }
+                 } else {
+                    FactAddressValue fact = (FactAddressValue) flowersFacts.get(0);
+                    String flowerName = fact.getFactSlot("name").toString();
+                    flowerFactString += "flower name is : " + flowerName;
+                 }
+             }
+             
+             /*if(heightFact != null) {
+                 String heightVal = heightFact.getFactSlot("name").toString();
+                 heightFactString = heightVal;
+             }
+             
+             if(lifeTypeFact != null) {
+                 String lifeTypeVal = lifeTypeFact.getFactSlot("type").toString();
+                 lifeTypeFactString = lifeTypeVal;
+             }*/
+             
+             ResultFrame rf = new ResultFrame(flowerFactString);
+            rf.setVisible(true);
+         }
+    }
 
     /**
      * @param args the command line arguments

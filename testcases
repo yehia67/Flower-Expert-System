@@ -1,0 +1,175 @@
+
+(assert (size (no 70)))
+(assert (size (no 200)))   
+
+
+(life_cycle (cycle 1))
+(assert (life_cycle (cycle 5))) 
+
+
+
+(assert(season (name summer)))
+(assert(color (name blue)))
+(assert(life_type (type perennial)))
+(assert(root_type (type bulb)))
+
+(assert(season (name summer)))
+(assert(color (name purple)))
+(assert(life_type (type perennial)))
+(assert(root_type (type bulb)))
+
+(assert(season (name summer)))
+(assert(color (name yellow)))
+(assert(life_type (type perennial)))
+(assert(root_type (type bulb)))
+
+
+
+(assert(season (name autumn)))
+(assert(color (name white)))
+
+(assert(season (name autumn)))
+(assert(color (name pink)))
+
+
+(assert(season (name autumn)))
+(assert(color (name pinkish-red)))
+
+
+
+(assert(season (name autumn)))
+(assert(height (name medium)))
+(assert(color (name yellow)))
+(assert(color (name white)))
+
+(assert(season (name autumn)))
+(assert(height (name medium)))
+(assert(color (name yellow)))
+(assert(color (name purple)))
+
+(assert(season (name autumn)))
+(assert(height (name medium)))
+(assert(color (name yellow)))
+(assert(color (name red)))
+
+
+
+(assert(season (name spring)))
+(assert(root_type (type bulb)))
+(assert(color (name white)))
+(assert(color (name yellow)))
+(assert(perfume (flag 1)))
+
+
+(assert(season (name spring)))
+(assert(root_type (type bulb)))
+(assert(color (name white)))
+(assert(color (name orange)))
+(assert(perfume (flag 1)))
+
+(assert(season (name spring)))
+(assert(root_type (type bulb)))
+(assert(color (name white)))
+(assert(color (name prurple)))
+(assert(perfume (flag 1)))
+
+(assert(season (name spring)))
+(assert(root_type (type bulb)))
+(assert(color (name white)))
+(assert(color (name red)))
+(assert(perfume (flag 1)))
+
+(assert(season (name spring)))
+(assert(root_type (type bulb)))
+(assert(color (name white)))
+(assert(color (name blue)))
+(assert(perfume (flag 1)))
+
+(assert(life_type (type perennial)))
+(assert(height (name tall)))
+(assert(root_type (type bulb)))
+(assert(season (name summer)))
+
+(assert(root_type (type bulb)))
+(assert(color (name yellow)))
+
+(assert(root_type (type bulb)))
+(assert(color (name white)))
+
+
+(assert(soil (type acidic)))
+(assert(color (name white)))
+(assert(life_type (type perennial)))
+(assert(root_type (type roots)))
+
+(assert(soil (type acidic)))
+(assert(color (name pink)))
+(assert(life_type (type perennial)))
+(assert(root_type (type roots)))
+
+(assert(soil (type acidic)))
+(assert(color (name red)))
+(assert(life_type (type perennial)))
+(assert(root_type (type roots)))
+
+
+(assert(season (name spring)))
+(assert(root_type (type bulb)))
+(assert(perfume (flag 1)))
+(assert(height (name small)))
+(assert(life_type (type perennial)))
+
+
+(assert(height (name small)))
+(assert(life_type (type annual)))
+(assert(season (name spring)))
+(assert(soil (type rich)))
+
+(assert(height (name small)))
+(assert(life_type (type annual)))
+(assert(season (name spring)))
+(assert(soil (type loose)))
+
+(assert(height (name small)))
+(assert(life_type (type annual)))
+(assert(season (name spring)))
+(assert(soil (type fertile)))
+
+
+(assert(season (name winter)))
+(assert(color (name white)))
+
+(assert(season (name winter)))
+(assert(color (name pink)))
+
+(assert(season (name winter)))
+(assert(color (name red)))
+
+
+(assert(life_type (type perennial)))
+(assert(root_type (type roots)))
+(assert(color (name white)))
+
+(assert(life_type (type perennial)))
+(assert(root_type (type roots)))
+(assert(color (name red)))
+
+(assert(life_type (type perennial)))
+(assert(root_type (type roots)))
+(assert(color (name blue)))
+
+(assert(life_type (type perennial)))
+(assert(root_type (type roots)))
+(assert(color (name yellow)))
+
+
+(assert(life_type (type perennial)))
+(assert(root_type (type roots)))
+(assert(color (name white)))
+(assert(perfume (flag 1)))
+(assert(soil (type well-drained)))
+
+
+
+(assert(flower_name (name Lily)))
+(assert(perfume (flag 1)))
