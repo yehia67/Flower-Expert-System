@@ -771,7 +771,7 @@ public class Frame extends javax.swing.JFrame {
                     "AND life type is perennial\n" +
                     "THEN flower name is White Lily\n";
          } else if(name.equalsIgnoreCase("(Freesia)")) {
-             return "Determined flower name \"White Lily\" from user respone\n" +
+             return "Determined flower name \"Freesia\" from user respone\n" +
                      "User choose the color as " + colorFact.getFactSlot("name").toString() + "\n" +
                      "User choose season as " + seasonFact.getFactSlot("name").toString() + "\n" +
                      "User choose root type as " + roottypeFact.getFactSlot("type").toString() + "\n" +
