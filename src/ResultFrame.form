@@ -70,6 +70,9 @@
       <AccessibilityProperties>
         <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="howBtn"/>
       </AccessibilityProperties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="howBtnActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

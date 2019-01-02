@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,10 +17,12 @@ public class ResultFrame extends javax.swing.JFrame {
      * Creates new form ResultFrame
      */
     private String flowersNames, heightResult, lifeTypeResult;
-    public ResultFrame(String flowersNames) {
+    private String howString;
+    public ResultFrame(String flowersNames, String howString) {
         initComponents();
         
         this.flowersNames = flowersNames;
+        this.howString = howString;
         
         setupResultTxtArea();
     }
@@ -52,6 +57,11 @@ public class ResultFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(resultTxtArea);
 
         howBtn.setText("How?");
+        howBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                howBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -78,6 +88,11 @@ public class ResultFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void howBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_howBtnActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, howString);
+    }//GEN-LAST:event_howBtnActionPerformed
 
     /**
      * @param args the command line arguments

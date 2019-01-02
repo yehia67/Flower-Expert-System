@@ -91,7 +91,7 @@ public class Frame extends javax.swing.JFrame {
 
         jLabel5.setText("What is the Root Type of the flower?");
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Bulb", "root" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select one", "Bulb", "roots" }));
 
         jLabel6.setText("What is the height of the flower?");
 
@@ -512,12 +512,11 @@ public class Frame extends javax.swing.JFrame {
         //textField1.setText(ou);
             PrimitiveValue value=clips.eval("(facts)");
             flowersFacts = ((MultifieldValue) clips.eval("(find-all-facts ((?f flower_name)) TRUE)"));
-            heightFact = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f height)) TRUE)")).get(0);
-            lifeTypeFact =  (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f life_type)) TRUE)")).get(0);
             
             String flowerFactString = "";
             String heightFactString = "";
             String lifeTypeFactString = "";
+            String howString = "";
             
             if(flowersFacts.size() > 1) {
                 for(int i = 0; i < flowersFacts.size(); i++) {
@@ -526,11 +525,13 @@ public class Frame extends javax.swing.JFrame {
                    String flowerName = fact.getFactSlot("name").toString();
                    flowerFactString += "flower " + (i + 1) + 
                            " name is : " + flowerName + "\n";
+                   howString += getFlowerHow(flowerName, howString);
                 }
             } else {
                FactAddressValue fact = (FactAddressValue) flowersFacts.get(0);
                String flowerName = fact.getFactSlot("name").toString();
                flowerFactString += "flower name is : " + flowerName;
+               howString += getFlowerHow(flowerName, howString);
             }
             
             /*String heightVal = heightFact.getFactSlot("name").toString();
@@ -539,11 +540,12 @@ public class Frame extends javax.swing.JFrame {
             String lifeTypeVal = lifeTypeFact.getFactSlot("type").toString();
             lifeTypeFactString = "Life Type is : " + lifeTypeVal;*/
             
-            ResultFrame rf = new ResultFrame(flowerFactString);
+            ResultFrame rf = new ResultFrame(flowerFactString, howString);
             rf.setVisible(true);
             
          } catch (Exception ex) {
              System.out.println(ex.toString());
+             String howString = "";
              String flowerFactString = null;
              if(flowersFacts != null && flowersFacts.size() != 0) {
                  flowerFactString = "" ;
@@ -554,11 +556,13 @@ public class Frame extends javax.swing.JFrame {
                         String flowerName = fact.getFactSlot("name").toString();
                         flowerFactString += "flower " + (i + 1) + 
                            " name is : " + flowerName + "\n";
+                        howString += getFlowerHow(flowerName, howString);
                      }
                  } else {
                     FactAddressValue fact = (FactAddressValue) flowersFacts.get(0);
                     String flowerName = fact.getFactSlot("name").toString();
                     flowerFactString += "flower name is : " + flowerName;
+                    howString += getFlowerHow(flowerName, howString);
                  }
              }
              
@@ -572,11 +576,213 @@ public class Frame extends javax.swing.JFrame {
                  lifeTypeFactString = lifeTypeVal;
              }*/
              
-             ResultFrame rf = new ResultFrame(flowerFactString);
+             ResultFrame rf = new ResultFrame(flowerFactString, howString);
             rf.setVisible(true);
          }
     }
 
+     private String getFlowerHow(String name, String output) throws Exception {
+         String lifeCycle = jComboBox2.getSelectedItem().toString();
+         String perfume = jComboBox8.getSelectedItem().toString();
+         String season  = jComboBox1.getSelectedItem().toString(); 
+         String color  = jComboBox3.getSelectedItem().toString();
+         String rootType  = jComboBox4.getSelectedItem().toString();
+         String soil     = jComboBox6.getSelectedItem().toString();
+         int size = jSlider1.getValue();
+         
+         FactAddressValue seasonFact = null;
+         FactAddressValue colorFact = null;
+         FactAddressValue lifetypeFact = null;
+         FactAddressValue soilFact = null;
+         FactAddressValue perfumed = null;
+         FactAddressValue lifecycleFact = null;
+         FactAddressValue roottypeFact = null;
+         FactAddressValue height = null;
+         
+         if(!season.equals("Select one")){
+            seasonFact = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f season)) TRUE)")).get(0);
+
+         }
+         
+         if(!color.equals("Select one")){
+           colorFact = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f color)) TRUE)")).get(0);
+          }
+          
+         if(!rootType.equals("Select one")){
+            roottypeFact = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f root_type)) TRUE)")).get(0);
+         }
+         
+         if(!soil.equals("Select one")){
+             soilFact = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f soil)) TRUE)")).get(0);
+         }
+         if(!perfume.equals("Select one")) {
+             perfumed = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f perfume)) TRUE)")).get(0);
+         }
+         
+         if(!lifeCycle.equals("Select one")) {
+             lifecycleFact = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f life_cycle)) TRUE)")).get(0);
+             lifetypeFact = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f life_type)) TRUE)")).get(0);
+         }
+         
+         if(size > 10 && size < 1000) {
+             height = (FactAddressValue) ((MultifieldValue) clips.eval("(find-fact ((?f height)) TRUE)")).get(0);
+         }
+            
+          
+         
+         if(name.equalsIgnoreCase("(irise)")) {
+             return "Determined flower name \"irise\" from user respone\n" + 
+                     "User choose the season as " + seasonFact.getFactSlot("name").toString() + "\n" +
+                     "User choose the color as " + colorFact.getFactSlot("name").toString() + "\n" +
+                     "User choose the life type as " + lifetypeFact.getFactSlot("type").toString() + " by choosing lifecycle as " + lifecycleFact.getFactSlot("cycle").toString() + "\n" +
+                     "User choose root type as " + roottypeFact.getFactSlot("type").toString() + "\n" +
+                     "RULE 7 : IF season is summer\n" +
+                        "AND color is blue\n" +
+                        "OR color is purple\n" +
+                        "OR color is yellow\n" +
+                        "AND life type is perennial\n" +
+                        "AND root type is bulb\n" +
+                        "THEN flower name is iris\n";
+             
+         } else if(name.equalsIgnoreCase("(dahlia)")) {
+             return "Determined flower name \"dahlia\" from user respone\n" + 
+                     "User choose the season as " + seasonFact.getFactSlot("name").toString() + "\n" +
+                     "User choose the height as " + height.getFactSlot("name").toString() + "\n" +
+                     "User choose the life type as " + lifetypeFact.getFactSlot("type").toString() + " by choosing lifecycle as " + lifecycleFact.getFactSlot("cycle").toString() + "\n" +
+                     "User choose root type as " + roottypeFact.getFactSlot("type").toString() + "\n" +
+                     "Rule 11: IF life type is perennial\n" +
+                        "AND height is tall\n" +
+                        "AND root type is bulbs\n" +
+                        "AND season is summer\n" +
+                        "THEN flower name is Dahlia\n";
+             
+         } else if(name.equalsIgnoreCase("(Azalea)")) {
+             return "Determined flower name \"Azalea\" from user respone\n" + 
+                     "User choose the season as " + seasonFact.getFactSlot("name").toString() + "\n" +
+                     "User choose the color as " + colorFact.getFactSlot("name").toString() + "\n" +
+                     "Rule 16: IF season is winter\n" +
+                    "AND color is white\n" +
+                    "OR color is pink\n" +
+                    "OR color is red\n" +
+                    "THEN flower name is Azalea\n";
+             
+         } else if(name.equalsIgnoreCase("(Chrysanthemum)")) {
+             return "Determined flower name \"Chrysanthemum\" from user respone\n" + 
+                     "User choose the season as " + seasonFact.getFactSlot("name").toString() + "\n" +
+                     "User choose the height as " + height.getFactSlot("name").toString() + "\n" +
+                     "User choose the color as " + colorFact.getFactSlot("name").toString() + "\n" +
+                     "Rule 9: IF season is autumn\n" +
+                    "AND height is medium\n" +
+                    "AND color is yellow\n" +
+                    "OR color is while\n" +
+                    "OR color is purple\n" +
+                    "OR color is red\n" +
+                    "THEN flower name is Chrysanthemum\n";
+         } else if(name.equalsIgnoreCase("(Anemone)") && seasonFact == null) {
+             return "Determined flower name \"Anemone\" from user respone\n" +
+                     "User choose the color as " + colorFact.getFactSlot("name").toString() + "\n" +
+                     "User choose the life type as " + lifetypeFact.getFactSlot("type").toString() + " by choosing lifecycle as " + lifecycleFact.getFactSlot("cycle").toString() + "\n" +
+                     "User choose root type as " + roottypeFact.getFactSlot("type").toString() + "\n" +
+                     "Rule 17: IF life type is perennial\n" +
+                    "AND root type is root\n" +
+                    "AND color is white\n" +
+                    "OR color is red\n" +
+                    "OR color is blue\n" +
+                    "OR color is yellow\n" +
+                    "THEN flower is Anemone\n";
+         } else if(name.equalsIgnoreCase("(Anemone)")) {
+             
+             return "Determined flower name \"Anemone\" from user respone\n" +
+                     "User choose the color as " + colorFact.getFactSlot("name").toString() + "\n" +
+                     "User choose season as " + seasonFact.getFactSlot("name").toString() + "\n" +
+                     "Rule 8: IF season is autumn\n" +
+                        "AND color is white\n" +
+                        "OR color is pink\n" +
+                        "OR color is pinkish-red\n" +
+                        "THEN flower name is anemone\n";
+         } else if(name.equalsIgnoreCase("(Narcissus)")) {
+             return "Determined flower name \"Narcissus\" from user respone\n" +
+                     "User choose the color as " + colorFact.getFactSlot("name").toString() + "\n" +
+                     "User choose season as " + seasonFact.getFactSlot("name").toString() + "\n" +
+                     "User choose root type as " + roottypeFact.getFactSlot("type").toString() + "\n" +
+                     "Rule 12: IF season is spring\n" +
+                    "AND root type is bulbs\n" +
+                    "AND color is yellow\n" +
+                    "OR color is white\n" +
+                    "THEN flower name is Narcissus\n";
+             
+         } else if(name.equalsIgnoreCase("(White Lily)")) {
+             return "Determined flower name \"White Lily\" from user respone\n" +
+                     "User choose the height as " + height.getFactSlot("name").toString() + "\n" +
+                     "User choose season as " + seasonFact.getFactSlot("name").toString() + "\n" +
+                     "User choose root type as " + roottypeFact.getFactSlot("type").toString() + "\n" +
+                     "User choose life type as " + lifetypeFact.getFactSlot("type").toString() + "\n" +
+                     "User choose if it has perfume as " + perfumed.getFactSlot("flag").toString() + "\n" +
+                     "Rule 14: IF season is spring\n" +
+                    "AND root type is bulbs\n" +
+                    "AND perfumed is true\n" +
+                    "AND height is small\n" +
+                    "AND life type is perennial\n" +
+                    "THEN flower name is White Lily\n";
+         } else if(name.equalsIgnoreCase("(Freesia)")) {
+             return "Determined flower name \"White Lily\" from user respone\n" +
+                     "User choose the color as " + colorFact.getFactSlot("name").toString() + "\n" +
+                     "User choose season as " + seasonFact.getFactSlot("name").toString() + "\n" +
+                     "User choose root type as " + roottypeFact.getFactSlot("type").toString() + "\n" +
+                     "User choose if it has perfume as " + perfumed.getFactSlot("flag").toString() + "\n" +
+                     "Rule 10: IF season is spring\n" +
+                        "AND root type is bulbs\n" +
+                        "AND color is white\n"+
+                     "OR color is yellow\n" +
+                    "OR color is orange\n" +
+                    "OR color is purple\n" +
+                    "OR color is red\n" +
+                    "OR color is blue\n" +
+                    "AND perfumed is true\n" +
+                    "THEN flower is Freesia\n";
+         } else if(name.equalsIgnoreCase("(Camellia)")) {
+             return "Determined flower name \"Camellia\" from user response\n" +
+                     "User choose soil as " + soilFact.getFactSlot("type").toString() + "\n" +
+                     "User choose color as " + colorFact.getFactSlot("name").toString() + "\n" +
+                     "User choose life type as " + lifetypeFact.getFactSlot("type").toString() + "\n"+
+                     "User choose root type as " + roottypeFact.getFactSlot("type").toString() + "\n"+
+                     "Rule 13: IF soil is acidic\n" +
+                    "AND color is white\n" +
+                    "OR color is pink\n" +
+                    "OR color is red\n" +
+                    "AND life type is perennial\n" +
+                    "AND root type is roots\n" +
+                    "THEN flower name is Camellia\n";
+         } else if(name.equalsIgnoreCase("(Begonia)")) {
+             return "Determined flower name \"Begonia\" from user response\n" +
+                     "User choose soil as " + soilFact.getFactSlot("type").toString() + "\n" +
+                     "User choose height as " + height.getFactSlot("name").toString() + "\n" +
+                     "User choose life type as " + lifetypeFact.getFactSlot("type").toString() + "\n"+
+                     "Rule 15: IF height is small\n" +
+                    "AND life type is annual\n" +
+                    "AND soil is rich\n" +
+                    "OR soil is loose\n" +
+                    "OR soil is fertile\n" +
+                    "THEN flower name is Begonia\n";
+         } else if(name.equalsIgnoreCase("(Rose)")) {
+             return "Determined flower name \"Rose\" from user response\n" +
+                     "User choose soil as " + soilFact.getFactSlot("type").toString() + "\n" +
+                     "User choose color as " + height.getFactSlot("name").toString() + "\n" +
+                     "User choose life type as " + lifetypeFact.getFactSlot("type").toString() + "\n"+
+                     "User choose root type as " + roottypeFact.getFactSlot("type").toString() + "\n"+
+                     "User choose if it has perfume as " + perfumed.getFactSlot("flag").toString() + "\n" +
+                     "Rule 18: IF life type is perennial\n" +
+                        "AND root type is roots\n" +
+                        "AND color is white\n" +
+                        "OR color is pink\n" +
+                        "OR color is red\n" +
+                        "OR color is yellow\n" +
+                        "AND perfumed is true\n" +
+                        "AND soil is well-drained\n" +
+                        "THEN flower is rose\n";
+         }
+         return "";
+     }
     /**
      * @param args the command line arguments
      */
