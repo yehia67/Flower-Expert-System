@@ -345,9 +345,9 @@ public class Frame extends javax.swing.JFrame {
         String message = "";
         if( evt.getActionCommand().equalsIgnoreCase("why_size")){
            message = "We need the size to determine height that we will search in\n";
-           message += "For example in case of size was > 150 :-\n";
+           message += "For example in case of size was > 150 then height is tall so :-\n";
            message += " IF life type is perennial\n" +
-                        "AND height is tall\n" +
+                        
                         "AND root type is bulbs\n" +
                         "AND season is summer\n" +
                         "THEN flower name is Dahlia";
@@ -355,6 +355,18 @@ public class Frame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, message );
         }
         else if(evt.getActionCommand().equalsIgnoreCase("why_lifecycle")){
+            message = "We need the life cycle to determine life type that we will search in as:\n";
+           message += "If life cycle is one year theb life type is annual-\n";
+            message += "and if life cycle is more than one year then life type is perennial-\n";
+            message += "For example: \n"; 
+           message += "  IF season is summer\n" +
+                        " AND color is blue\n" +
+                        " OR color is purple\n" +
+                        " OR color is yellow\n" +
+                        " AND life type is perennial\n" +
+                        " AND root type is bulb\n" +
+                        " THEN flower name is iris";
+            
              JOptionPane.showMessageDialog(this, message );
         }
         else if(evt.getActionCommand().equalsIgnoreCase("why_season")){
@@ -368,11 +380,24 @@ public class Frame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, message );
         }
         else if(evt.getActionCommand().equalsIgnoreCase("why_root")){
+             message = "We need to determine root type of the flower ";
+          
+           message += "As there's wide variety of root types for example:\n";
+           message +=" IF season is spring\n" +
+                        "AND root type is bulbs\n" +
+                        "AND color is white\n"+ 
+                         "OR color is yellow\n" +
+                        "OR color is orange\n" +
+                        "OR color is purple\n" +
+                        "OR color is red\n" +
+                        "OR color is blue\n" +
+                        "AND perfumed is true\n" +
+                        "THEN flower is Frees";
              JOptionPane.showMessageDialog(this, message );
         }
-        else if(evt.getActionCommand().equalsIgnoreCase("why_height")){
+      /*  else if(evt.getActionCommand().equalsIgnoreCase("why_height")){
              JOptionPane.showMessageDialog(this, message );
-        }
+        }*/
         else if(evt.getActionCommand().equalsIgnoreCase("why_soil")){
            message = "We need to determine the soil of the flower was Begonia, Rose, or Camellia\n";
            message += "For example if the soil was acidic\n";
@@ -386,9 +411,30 @@ public class Frame extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this, message );
         }
         else if(evt.getActionCommand().equalsIgnoreCase("why_perfume")){
+            message = "We need to determine if the flower was perfumed\n";
+          
+           message += "For example if it wasn't perfumed the flower would be Narcissus\n";
+           message += "IF season is spring\n" +
+                    "AND root type is bulbs\n" +
+                    "AND color is yellow\n" +
+                    "OR color is white\n" +
+                    "THEN flower name is Narcissus";
              JOptionPane.showMessageDialog(this, message );
         }
         else if(evt.getActionCommand().equalsIgnoreCase("why_color")){
+            message = "We need to determine color of the flower\n";
+          
+           message += "As there's wide variety of colors for example:\n";
+           message +=" IF season is spring\n" +
+                        "AND root type is bulbs\n" +
+                        "AND color is white\n"+ 
+                         "OR color is yellow\n" +
+                        "OR color is orange\n" +
+                        "OR color is purple\n" +
+                        "OR color is red\n" +
+                        "OR color is blue\n" +
+                        "AND perfumed is true\n" +
+                        "THEN flower is Frees";
              JOptionPane.showMessageDialog(this, message );
         }
         //JOptionPane.showMessageDialog(this, message );
